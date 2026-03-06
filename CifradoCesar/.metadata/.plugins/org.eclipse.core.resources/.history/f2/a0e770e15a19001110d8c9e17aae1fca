@@ -1,0 +1,74 @@
+package cifradoCesar;
+
+import java.util.*;
+
+public class CifradoCesar {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingresa el texto que queres cifrar: ");
+        String texto = scanner.nextLine();
+
+        // Pedir la clave de desplazamiento
+        System.out.print("Ingresa la clave: ");
+        int clave = scanner.nextInt();
+
+        // Llamar al método cifrar
+        String cifrado = cifrar(texto, clave);
+
+        // Llamar al método descifrar para comprobar que funciona
+        String descifrado = descifrar(cifrado, clave);
+
+       
+        System.out.println("Texto cifrado: " + cifrado);
+        System.out.println("Texto descifrado: " + descifrado);
+
+        scanner.close();
+    }
+
+    // Método que cifra el texto usando el algoritmo César
+    public static String cifrar(String texto, int clave) {
+
+        // StringBuilder se usa para construir el resultado de forma eficiente
+        StringBuilder resultado = new StringBuilder();
+
+        // Recorrer el texto carácter por carácter
+        for (int i = 0; i < texto.length(); i++) {
+
+            // Obtener el carácter actual
+            char c = texto.charAt(i);
+
+            // Si es una letra mayúscula
+            if (c >= 'A' && c <= 'Z') {
+
+                // Aplicar desplazamiento dentro del alfabeto
+                char cifrado = (char) ('A' + (c - 'A' + clave + 26) % 26);
+                resultado.append(cifrado);
+
+            }
+            // Si es una letra minúscula
+            else if (c >= 'a' && c <= 'z') {
+
+                // Aplicar desplazamiento dentro del alfabeto
+                char cifrado = (char) ('a' + (c - 'a' + clave + 26) % 26);
+                resultado.append(cifrado);
+
+            }
+            // Si es espacio o carácter especial, no se modifica
+            else {
+                resultado.append(c);
+            }
+        }
+
+        // Convertir el StringBuilder a String y devolver el resultado
+        return resultado.toString();
+    }
+
+    // Método para descifrar el texto
+    // Se reutiliza el método cifrar usando la clave negativa
+    public static String descifrar(String texto, int clave) {
+        return cifrar(texto, -clave);
+    }
+}
