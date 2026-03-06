@@ -14,5 +14,6 @@ Los **espacios y caracteres especiales** se mantienen sin modificar.
 ## Tecnologías utilizadas
 
 - Java
-- Scanner (entrada por teclado)
+- Git
+- Github
 - StringBuilder (para construir el texto cifrado de forma más eficiente)
